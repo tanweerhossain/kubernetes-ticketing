@@ -4,12 +4,15 @@ import { currentUserRouter } from '../routes/current-user';
 import { signinRouter } from '../routes/signin';
 import { signoutRouter } from '../routes/signout';
 import { signupRouter } from '../routes/signup';
+import { signinValidator } from '../validation/signin';
 import { signupValidator } from '../validation/signup';
+import { authFilter } from './auth-filter';
+import { validateRequest } from './validate-request';
 
 export const attachRoutes = (app: Express): void => {
-  app.get('/api/users/currentuser', currentUserRouter);
-  app.post('/api/users/signin', signinRouter);
-  app.post('/api/users/signout', signoutRouter);
-  app.post('/api/users/signup', signupValidator, signupRouter);
+  app.get('/api/users/currentuser', authFilter, currentUserRouter);
+  app.post('/api/users/signin', signinValidator, validateRequest, signinRouter);
+  app.post('/api/users/signout', authFilter, signoutRouter);
+  app.post('/api/users/signup', signupValidator, validateRequest, signupRouter);
   app.all('/*', () => { throw new NotFoundError() });
 };

@@ -14,6 +14,20 @@ const userSchema = new Schema({
     type: String,
     required: true
   }
+}, {
+  toJSON: {
+    transform(doc: any, ret: any) {
+      // Changing _id -> id
+      ret.id = ret._id;
+      delete ret._id;
+
+      // Removing password to access
+      // delete ret.password;
+
+      // versionKey OR delete ret.__v;
+    },
+    versionKey: false
+  }
 });
 
 userPlugins(userSchema);
