@@ -11,7 +11,7 @@ export const attachMiddlewares = async (app: Express): Promise<void> => {
   app.use(
     CookieSession({
       signed: false,
-      secure: true
+      secure: (process.env.mode?.trim() !== 'test')
     })
   );
 
@@ -19,5 +19,5 @@ export const attachMiddlewares = async (app: Express): Promise<void> => {
     throw new Error('JWT_KEY is missing');
   }
 
-  await mongoSetup();
+  if (process.env.mode?.trim() !== 'test') await mongoSetup();
 };

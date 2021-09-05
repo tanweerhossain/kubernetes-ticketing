@@ -1,11 +1,9 @@
 import { Request, Response } from "express";
-import { validationResult } from "express-validator";
 import { BadRequest } from "../errors/bad-request-error";
-import { RequestValidationError } from "../errors/request-validation-error";
 import { UserAttributesInterface } from "../interface/UserAttributesInterface";
 import { getJWT } from "../services/jwt";
 import { Password } from "../services/password";
-import { findUser, isUserExist } from "../transactions/user.transactions";
+import { findUser } from "../transactions/user.transactions";
 
 export const signinRouter = async (
   req: Request,
