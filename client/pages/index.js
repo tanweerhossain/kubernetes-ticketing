@@ -6,9 +6,14 @@ const App = ({ currentUser }) =>
     : (<h4>You are not Signed In</h4>);
 
 App.getInitialProps = async (context) => {
-  const { data } = await buildClient(context)
-    .get('/api/users/currentuser');
-  return data
+  try {
+    const { data } = await buildClient(context)
+      .get('/api/users/currentuser');
+    return data;
+  } catch (error) {
+    console.error('===>', (error.response.data));
+    return error;
+  }
 };
 
 export default App;
