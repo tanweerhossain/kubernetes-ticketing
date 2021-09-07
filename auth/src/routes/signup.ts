@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
-import { validationResult } from "express-validator";
 import { LeanDocument } from "mongoose";
 import { BadRequest } from "../errors/bad-request-error";
-import { RequestValidationError } from "../errors/request-validation-error";
 import { UserAttributesInterface } from "../interface/UserAttributesInterface";
 import { createUser, isUserExist } from "../transactions/user.transactions";
 
