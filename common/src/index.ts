@@ -5,9 +5,9 @@ interface Color {
 };
 
 const color: Color = {
-  red: 10,
+  red: 20,
   blue: 10,
-  green: 101
+  green: 10
 };
 
 export default color;
