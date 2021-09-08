@@ -6,8 +6,8 @@ import { signoutRouter } from '../routes/signout';
 import { signupRouter } from '../routes/signup';
 import { signinValidator } from '../validation/signin';
 import { signupValidator } from '../validation/signup';
-import { authFilter } from '../../../common/src/middlewares/auth-filter';
-import { validateRequest } from '../../../common/src/middlewares/validate-request';
+import { authFilter } from '@tanweerhossain/common';
+import { validateRequest } from '@tanweerhossain/common';
 
 export const attachRoutes = (app: Express): void => {
   app.get('/api/users/currentuser', authFilter, currentUserRouter);

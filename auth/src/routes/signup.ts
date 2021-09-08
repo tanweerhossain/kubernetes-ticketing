@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { LeanDocument } from "mongoose";
-import { BadRequest } from "../errors/bad-request-error";
-import { UserAttributesInterface } from "../../../common/src/interface/UserAttributesInterface";
+import { BadRequest } from "@tanweerhossain/common";
+import { UserAttributesInterface } from "@tanweerhossain/common";
 import { createUser, isUserExist } from "../transactions/user.transactions";
 
 export const signupRouter = async (

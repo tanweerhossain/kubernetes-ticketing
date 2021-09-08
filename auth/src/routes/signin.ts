@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
-import { BadRequest } from "../../../common//src/errors/bad-request-error";
-import { UserAttributesInterface } from "../../../common/src/interface/UserAttributesInterface";
-import { getJWT } from "../../../common/src/services/jwt";
+import { BadRequest } from "@tanweerhossain/common";
+import { UserAttributesInterface } from "@tanweerhossain/common";
+import { getJWT } from "@tanweerhossain/common";
+
 import { Password } from "../services/password";
 import { findUser } from "../transactions/user.transactions";
 

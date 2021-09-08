@@ -1,5 +1,5 @@
 import { Model } from "mongoose";
-import { UserAttributesInterface } from "../../../common/src/interface/UserAttributesInterface";
+import { UserAttributesInterface } from "@tanweerhossain/common";
 import { UserDocInterface } from "./UserDocInterface";
 
 export interface UserModelInterface extends Model<UserDocInterface> {
