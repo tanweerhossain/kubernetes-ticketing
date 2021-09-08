@@ -10,4 +10,7 @@ export * from './middlewares/custom-attributes-setting';
 export * from './middlewares/error-handler';
 export * from './middlewares/validate-request';
 
-export * from './middlewares/validate-request';
+export * from './services/jwt';
+
+export * from './interface/ErrorResponse';
+export * from './interface/UserAttributesInterface';
