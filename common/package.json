@@ -1,6 +1,6 @@
 {
   "name": "@tanweerhossain/common",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -9,9 +9,13 @@
   ],
   "scripts": {
     "clean": "del-cli ./build/",
-    "build": "npm run clean && tsc",
+    "prebuild": "npm run clean ",
+    "build": "tsc",
     "git-commit": "npm version patch && git add . && git commit -m \"Topic: Update Common Microservice\nStatus: Done\"",
-    "pub": "npm run git-commit && npm run build && npm publish"
+    "postgit-commit": "git push origin master",
+    "prepub": "npm run git-commit",
+    "pub": "npm run build",
+    "postpub": "npm publish"
   },
   "keywords": [],
   "author": "",
