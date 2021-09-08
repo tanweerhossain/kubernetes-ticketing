@@ -1,13 +1,13 @@
 import { Express } from 'express';
-import { NotFoundError } from '../errors/not-found-error';
+import { NotFoundError } from '../../../common/src/errors/not-found-error';
 import { currentUserRouter } from '../routes/current-user';
 import { signinRouter } from '../routes/signin';
 import { signoutRouter } from '../routes/signout';
 import { signupRouter } from '../routes/signup';
 import { signinValidator } from '../validation/signin';
 import { signupValidator } from '../validation/signup';
-import { authFilter } from './auth-filter';
-import { validateRequest } from './validate-request';
+import { authFilter } from '../../../common/src/middlewares/auth-filter';
+import { validateRequest } from '../../../common/src/middlewares/validate-request';
 
 export const attachRoutes = (app: Express): void => {
   app.get('/api/users/currentuser', authFilter, currentUserRouter);

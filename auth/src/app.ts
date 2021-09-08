@@ -1,6 +1,6 @@
 import express from 'express';
 import 'express-async-errors';
-import { errorHandler } from './middlewares/error-handler';
+import { errorHandler } from '../../common/src/middlewares/error-handler';
 
 import { attachMiddlewares } from "./middlewares/index";
 import { attachRoutes } from "./middlewares/routes";

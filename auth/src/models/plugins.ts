@@ -1,6 +1,6 @@
 import { Schema } from "mongoose";
-import { UserAttributesInterface } from "../interface/UserAttributesInterface";
-import { UserDocInterface } from "../interface/UserDocInterface";
+import { UserAttributesInterface } from "../../../common/src/interface/UserAttributesInterface";
+import { UserDocInterface } from "../../../common/src/interface/UserDocInterface";
 import { Password } from "../services/password";
 import { User } from "./user";
 

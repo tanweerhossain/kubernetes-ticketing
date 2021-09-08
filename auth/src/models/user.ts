@@ -1,5 +1,4 @@
 import { model, Schema } from "mongoose";
-import { UserAttributesInterface } from "../interface/UserAttributesInterface";
 import { UserDocInterface } from "../interface/UserDocInterface";
 import { UserModelInterface } from "../interface/UserModelInterface";
 import { userPlugins } from "./plugins";

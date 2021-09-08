@@ -17,8 +17,8 @@ export const errorHandler = (
   console.error(err);
 
   res.status(502).send({
-    errors: {
+    errors: [{
       message: 'Please try later'
-    }
+    }]
   });
 };

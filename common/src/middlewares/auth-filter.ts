@@ -3,7 +3,6 @@ import { NextFunction, Request, Response } from "express";
 import { BadRequest } from "../errors/bad-request-error";
 import { UnAuthorized } from "../errors/unauthorized-error";
 import { verifyJWT } from "../services/jwt";
-import { isUserIdExist } from "../transactions/user.transactions";
 import "./custom-attributes-setting";
 
 export const authFilter = async (
@@ -26,10 +25,8 @@ export const authFilter = async (
       iat: number
     };
 
-    const isUserIdExistResult: boolean = await isUserIdExist(id);
 
-    if (!isUserIdExistResult ||
-      (iat > Date.now())) throw new BadRequest('User doesn\'t exist');
+    if (iat > Date.now()) throw new BadRequest('User doesn\'t exist');
 
     req.currentUserInfo = {
       id,

@@ -1,6 +1,6 @@
 import { LeanDocument } from "mongoose";
-import { DatabaseConnectionError } from "../errors/database-connection-error";
-import { UserAttributesInterface } from "../interface/UserAttributesInterface";
+import { DatabaseConnectionError } from "../../../common/src/errors/database-connection-error";
+import { UserAttributesInterface } from "../../../common/src/interface/UserAttributesInterface";
 import { UserDocInterface } from "../interface/UserDocInterface";
 import { User } from "../models/user";
 

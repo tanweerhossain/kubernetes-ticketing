@@ -1,5 +1,5 @@
 import { connect as MongoConnect } from "mongoose";
-import { nconf } from "../conf";
+import { nconf } from "../../../auth/src/conf";
 
 export const mongoSetup = async (): Promise<void> => {
   try {
