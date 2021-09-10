@@ -1,3 +1,2 @@
 {
-  "MONGO-DB-URL": "mongodb://auth-mongo-clusterip-srv:27017/auth"
 }

@@ -1,4 +1,4 @@
-import { UserAttributesInterface } from "../interface/UserAttributesInterface";
+import { UserAttributesInterface } from "@tanweerhossain/common";
 
 export const sampleUserData1:
   UserAttributesInterface = {
