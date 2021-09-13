@@ -1,6 +1,6 @@
 import { BadRequest } from "@tanweerhossain/common";
 import { NextFunction, Request, Response } from "express";
-import { TicketAttributesInterface } from "../interface/TicketAttributes";
+import { TicketAttributesInterface } from "@tanweerhossain/common";
 import { saveTicket } from "../transactions/ticket.transaction";
 
 export const saveTicketRouter = async (

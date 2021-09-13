@@ -1,5 +1,5 @@
 import { Schema } from "mongoose";
-import { TicketAttributesInterface } from "../interface/TicketAttributes";
+import { TicketAttributesInterface } from "@tanweerhossain/common";
 import { TicketDocInterface } from "../interface/TicketDoc";
 import { Ticket } from "./ticket";
 

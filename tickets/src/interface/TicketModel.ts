@@ -1,5 +1,5 @@
 import { Model } from "mongoose";
-import { TicketAttributesInterface } from "./TicketAttributes";
+import { TicketAttributesInterface } from "@tanweerhossain/common";
 import { TicketDocInterface } from "./TicketDoc";
 
 export interface TicketModelInterface extends Model<TicketDocInterface> {

@@ -1,7 +1,6 @@
 import { BadRequest } from "@tanweerhossain/common";
 import { NextFunction, Request, Response } from "express";
-import { TicketAttributesInterface } from "../interface/TicketAttributes";
-import { getTicket, saveTicket } from "../transactions/ticket.transaction";
+import { getTicket } from "../transactions/ticket.transaction";
 
 export const showTicketRouter = async (
   req: Request,

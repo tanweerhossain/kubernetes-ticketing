@@ -1,7 +1,7 @@
 import { LeanDocument } from "mongoose";
 import { DatabaseConnectionError } from "@tanweerhossain/common";
 
-import { TicketAttributesInterface } from "../interface/TicketAttributes";
+import { TicketAttributesInterface } from "@tanweerhossain/common";
 import { TicketDocInterface } from "../interface/TicketDoc";
 import { Ticket } from "../models/ticket";
 
