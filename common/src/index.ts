@@ -14,3 +14,11 @@ export * from './services/jwt';
 
 export * from './interface/ErrorResponse';
 export * from './interface/UserAttributesInterface';
+export * from './interface/TicketAttributesInterface';
+
+export * from './events/base-listener';
+export * from './events/base-publisher';
+export * from './events/event';
+export * from './events/subjects';
+export * from './events/ticket-created-event';
+export * from './events/ticket-updated-event';
