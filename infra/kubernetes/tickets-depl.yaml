@@ -16,6 +16,14 @@ spec:
         - name: tickets
           image: tanweerhossain/tickets:latest
           env:
+            - name: NATS_CLUSTER_URL
+              value: 'http://nats-clusterip-srv:4222'
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_CLUSTER_ID
+              value: 'ticketing'
             - name: MONGO_DB_URL
               value: 'mongodb://tickets-mongo-clusterip-srv:27017/tickets'
             - name: JWT_KEY

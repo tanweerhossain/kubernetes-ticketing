@@ -1,7 +1,8 @@
-import { isValidObjectId, Types } from "mongoose";
+import { Types } from "mongoose";
 import request, { Response } from "supertest";
 import { app } from "../../app";
 import { sampleCookie, sampleCookie2, sampleTicket, sampleTicket2 } from "../../constants/sample-test-data";
+import { natsWrapper } from "../../middlewares/nats-wrapper";
 import { saveTicketHelper } from "../../test/save-ticket-helper";
 
 const endpoint: string = '/api/tickets/<ticketId>';
@@ -158,6 +159,23 @@ it('Must return 200 response if ticket data are correct', (done) => {
           expect(res.body.title).toEqual(sampleTicket2.title);
           expect(res.body).toHaveProperty('price');
           expect(res.body.price).toEqual(sampleTicket2.price);
+
+
+          done();
+        });
+    });
+});
+
+it('It publish an event if ticket data are correct', (done) => {
+  saveTicketHelper()
+    .then((response: Response): void => {
+      request(app)
+        .put(endpoint.replace('<ticketId>', response.body.id))
+        .set('Cookie', sampleCookie)
+        .send(sampleTicket2)
+        .end((err: any, res: Response): void => {
+
+          expect(natsWrapper.client.publish).toHaveBeenCalled();
 
 
           done();

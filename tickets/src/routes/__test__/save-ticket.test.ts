@@ -1,6 +1,7 @@
 import request, { Response } from "supertest";
 import { app } from "../../app";
 import { sampleCookie, sampleTicket } from "../../constants/sample-test-data";
+import { natsWrapper } from "../../middlewares/nats-wrapper";
 
 const endpoint: string = '/api/tickets';
 
@@ -113,4 +114,16 @@ it('Returns 201 response if valid input was provided', (done) => {
       done();
     });
 
+});
+
+it('It publish an event if valid input was provided', (done) => {
+  request(app)
+    .post(endpoint)
+    .set('Cookie', sampleCookie)
+    .send(sampleTicket)
+    .end((err: any, res: Response) => {
+      expect(natsWrapper.client.publish).toHaveBeenCalled();
+
+      done();
+    });
 });
