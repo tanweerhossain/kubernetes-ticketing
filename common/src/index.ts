@@ -18,7 +18,10 @@ export * from './interface/TicketAttributesInterface';
 
 export * from './events/base-listener';
 export * from './events/base-publisher';
-export * from './events/event';
-export * from './events/subjects';
-export * from './events/ticket-created-event';
-export * from './events/ticket-updated-event';
+
+export * from './interface/event';
+export * from './interface/ticket-created-event';
+export * from './interface/ticket-updated-event';
+
+export * from './enums/subjects';
+export * from './enums/order-status';

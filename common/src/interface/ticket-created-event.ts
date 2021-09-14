@@ -1,6 +1,6 @@
-import { TicketAttributesInterface } from "../interface/TicketAttributesInterface";
+import { TicketAttributesInterface } from "./TicketAttributesInterface";
 import { Event } from "./event";
-import { Subjects } from "./subjects";
+import { Subjects } from "../enums/subjects";
 
 export interface TicketCreatedEvent extends Event {
   subject: Subjects.TicketCreated;

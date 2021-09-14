@@ -1,5 +1,5 @@
 import { Stan } from "node-nats-streaming";
-import { Event } from "./event";
+import { Event } from "../interface/event";
 
 export abstract class Publisher<T extends Event> {
   public abstract subject: T['subject'];
