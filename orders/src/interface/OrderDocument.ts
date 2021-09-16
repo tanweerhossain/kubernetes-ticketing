@@ -5,6 +5,6 @@ import { TicketDocInterface } from "./TicketDoc";
 export interface OrderDocumentInterface extends Document {
   userId: string;
   status: OrderStatus;
-  expireAt: Date;
+  expiresAt: Date;
   ticket: TicketDocInterface
 };

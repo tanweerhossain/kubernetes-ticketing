@@ -1,4 +1,3 @@
-import { TicketAttributesInterface } from "@tanweerhossain/common";
 import { Model } from "mongoose";
 import { OrderAttributesInterface } from "./OrderAttributes";
 import { OrderDocumentInterface } from "./OrderDocument";

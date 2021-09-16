@@ -1,5 +1,4 @@
 import { DatabaseConnectionError } from "@tanweerhossain/common";
-import { LeanDocument } from "mongoose";
 import { TicketAttributesInterface } from "../interface/TicketAttributes";
 import { TicketDocInterface } from "../interface/TicketDoc";
 import { Ticket } from "../models/ticket";
@@ -28,7 +27,7 @@ export const saveTicket = async (
   Promise<TicketDocInterface |
     null> => {
   try {
-    let result: TicketDocInterface = Ticket.build(ticketObject);
+    let result: TicketDocInterface = await Ticket.build(ticketObject);
 
     result = await result.save();
 
@@ -40,5 +39,31 @@ export const saveTicket = async (
   } catch (error) {
     console.error(error);
     throw new DatabaseConnectionError('Failed to save ticket');
+  }
+};
+
+export const updateTicket = async (
+  ticketId: string,
+  ticketAttributes: TicketAttributesInterface):
+  Promise<TicketDocInterface |
+    null> => {
+  try {
+    let result:
+      TicketDocInterface |
+      null = await Ticket.findOneAndUpdate({ _id: ticketId }, {
+        $set: ticketAttributes
+      }, {
+        new: true,
+        upsert: false
+      });
+
+    if (!!result) {
+      return result;
+    }
+
+    return null;
+  } catch (error) {
+    console.error(error);
+    throw new DatabaseConnectionError('Failed to update ticket');
   }
 };

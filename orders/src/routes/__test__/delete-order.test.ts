@@ -3,6 +3,7 @@ import { Types } from "mongoose";
 import request, { Response } from "supertest";
 import { app } from "../../app";
 import { sampleCookie, sampleCookie2, sampleTicket } from "../../constants/sample-test-data";
+import { natsWrapper } from "../../middlewares/nats-wrapper";
 import { getOrderByIdAndUser } from "../../transactions/order.transaction";
 import { saveTicket } from "../../transactions/ticket.transaction";
 
@@ -43,4 +44,23 @@ it('mark an order as cancelled', async () => {
   Promise.resolve(1);
 });
 
-it.todo('Write a test case for event publish');
+
+it('Emits an order cancelled event', async () => {
+  // Create a ticket
+  const ticket = await saveTicket(sampleTicket);
+
+  // Create One order with the ticket
+  const { body: order } = await request(app)
+    .post(endpoint.replace(':orderId', ''))
+    .set('Cookie', sampleCookie)
+    .send({ ticketId: ticket?.id })
+    .expect(201);
+
+  // Make request to cancel order
+  await request(app)
+    .delete(endpoint.replace(':orderId', order.id))
+    .set('Cookie', sampleCookie)
+    .expect(204);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+});

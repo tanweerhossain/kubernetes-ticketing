@@ -3,6 +3,8 @@ import { NextFunction, Request, Response } from "express";
 import { findTicketById } from "../transactions/ticket.transaction";
 import { createOrder, IsTicketReserved } from "../transactions/order.transaction";
 import { nconf } from "../conf";
+import { OrderCreatedPublisher } from "../events/publishers/order-created-publisher";
+import { natsWrapper } from "../middlewares/nats-wrapper";
 
 export const saveOrderRouter = async (
   req: Request,
@@ -33,13 +35,17 @@ export const saveOrderRouter = async (
   if (!order) throw new BadRequest("Failed to create order");
 
 
-  // await new TicketCreatedPublisher(natsWrapper.client)
-  //   .publish({
-  //     id: ticket.id,
-  //     title: ticket.title,
-  //     userId: ticket.userId,
-  //     price: ticket.price
-  //   });
+  new OrderCreatedPublisher(natsWrapper.client)
+    .publish({
+      id: order.id,
+      status: order.status,
+      userId: order.userId,
+      expiresAt: order.expiresAt.getTime().toString(),
+      ticket: {
+        id: ticket.id,
+        price: ticket.price
+      }
+    });
 
   res
     .status(201)

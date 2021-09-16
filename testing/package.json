@@ -1,0 +1,17 @@
+{
+  "name": "testing",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "SET JWT_KEY=sdfd23kdwopewqiukc && node ticket-create-update-concurrency-issue-testing.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tanweerhossain/common": "^1.0.12",
+    "axios": "^0.21.4",
+    "mongoose": "^6.0.6"
+  }
+}

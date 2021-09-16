@@ -3,6 +3,7 @@ import { Types } from "mongoose";
 import request, { Response } from "supertest";
 import { app } from "../../app";
 import { sampleCookie, sampleTicket } from "../../constants/sample-test-data";
+import { natsWrapper } from "../../middlewares/nats-wrapper";
 import { createOrder } from "../../transactions/order.transaction";
 import { saveTicket } from "../../transactions/ticket.transaction";
 
@@ -58,4 +59,17 @@ it('reserves a ticket', async () => {
   Promise.resolve(1);
 });
 
-it.todo('Write a test case for event publish');
+it('Emits an order created event', async () => {
+  const ticket = await saveTicket(sampleTicket);
+
+  if (!ticket) throw new Error('saveTicket failed');
+
+  await request(app)
+    .post(endpoint)
+    .set('Cookie', sampleCookie)
+    .send({ ticketId: ticket._id })
+    .expect(201);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+
+});

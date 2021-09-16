@@ -1,5 +1,6 @@
-import { BadRequest, OrderStatus, UnAuthorized } from "@tanweerhossain/common";
+import { BadRequest, OrderStatus } from "@tanweerhossain/common";
 import { NextFunction, Request, Response } from "express";
+import { OrderCancelledPublisher } from "../events/publishers/order-cancelled-publisher";
 import { natsWrapper } from "../middlewares/nats-wrapper";
 import { getOrderByIdAndUser } from "../transactions/order.transaction";
 
@@ -12,18 +13,19 @@ export const deleteOrderRouter = async (
 
   if (!order) throw new BadRequest('Order not found');
 
+  const ticketId = order.ticket.id;
   order.status = OrderStatus.Cancelled;
   await order.save();
 
   if (!order) throw new BadRequest('Order Cancelled failed');
 
-  // await new TicketUpdatedPublisher(natsWrapper.client)
-  //   .publish({
-  //     id: order.id,
-  //     title: order.title,
-  //     userId: order.userId,
-  //     price: order.price
-  //   });
+  new OrderCancelledPublisher(natsWrapper.client)
+    .publish({
+      id: order.id,
+      ticket: {
+        id: ticketId
+      }
+    });
 
   res.sendStatus(204);
 };

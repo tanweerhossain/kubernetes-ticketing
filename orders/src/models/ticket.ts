@@ -26,7 +26,11 @@ export const ticketSchema = new Schema({
 
 ticketSchema.statics.build = (attributes: TicketAttributesInterface):
   TicketDocInterface => {
-  return new Ticket(attributes);
+  return new Ticket({
+    _id: attributes.id,
+    title: attributes.title,
+    price: attributes.price
+  });
 };
 
 export const Ticket = model<TicketDocInterface, TicketModelInterface>('Ticket', ticketSchema);
