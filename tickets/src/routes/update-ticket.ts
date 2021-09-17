@@ -19,7 +19,7 @@ export const updateTicketRouter = async (
 
   if (!ticket) throw new BadRequest('Ticket updation failed');
 
-  await new TicketUpdatedPublisher(natsWrapper.client)
+  new TicketUpdatedPublisher(natsWrapper.client)
     .publish({
       id: ticket.id,
       title: ticket.title,

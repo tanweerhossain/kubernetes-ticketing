@@ -45,11 +45,11 @@ const aUnitOfTestingCycle = async (testIndex = 1) => {
   const response = await createTicket();
   console.log(`#${testIndex}`, response);
   await updateTicket(response.id);
-  await updateTicket(response.id, 2);
+  updateTicket(response.id, 2);
 };
 
 (function main() {
-  for (const i in Array(2000).fill(1)) {
+  for (const i in Array(200).fill(1)) {
     aUnitOfTestingCycle(i + 1);
   }
 })()

@@ -23,7 +23,7 @@ export const saveTicketRouter = async (
 
   if (!ticket) throw new BadRequest('Failed to save ticket');
 
-  await new TicketCreatedPublisher(natsWrapper.client)
+  new TicketCreatedPublisher(natsWrapper.client)
     .publish({
       id: ticket.id,
       title: ticket.title,
