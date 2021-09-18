@@ -3,5 +3,4 @@ export interface TicketAttributesInterface {
   title: string;
   price: number;
   userId: string;
-  version: number;
 };

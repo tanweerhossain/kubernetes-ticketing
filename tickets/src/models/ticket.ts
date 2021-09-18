@@ -22,8 +22,7 @@ const ticketSchema = new Schema({
       ret.id = ret._id;
 
       delete ret._id;
-    },
-    versionKey: false
+    }
   }
 });
 

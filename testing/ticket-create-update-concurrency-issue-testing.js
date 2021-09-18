@@ -49,7 +49,7 @@ const aUnitOfTestingCycle = async (testIndex = 1) => {
 };
 
 (function main() {
-  for (const i in Array(200).fill(1)) {
+  Array(1000).fill(1).map((_, i) => {
     aUnitOfTestingCycle(i + 1);
-  }
+  });
 })()

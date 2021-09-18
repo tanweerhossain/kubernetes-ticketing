@@ -68,23 +68,20 @@ export const fetchTickets = async (
 export const updateTicket = async (
   ticketId: string,
   ticketAttributes: TicketAttributesInterface):
-  Promise<LeanDocument<TicketDocInterface> |
-    null> => {
+  Promise<TicketDocInterface | null> => {
   try {
     let result:
       TicketDocInterface |
-      null = await Ticket.findOneAndUpdate({ _id: ticketId }, {
-        $set: ticketAttributes
-      }, {
-        new: true,
-        upsert: false
-      });
+      null = await Ticket.findOne({ _id: ticketId });
 
-    if (!!result) {
-      return result.toJSON();
-    }
+    if (!result) return null;
 
-    return null;
+    result.title = ticketAttributes.title || result.title;
+    result.price = ticketAttributes.price || result.price;
+
+    await result.save();
+
+    return result;
   } catch (error) {
     console.error(error);
     throw new DatabaseConnectionError('Failed to update ticket');
