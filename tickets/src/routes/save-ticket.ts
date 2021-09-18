@@ -28,7 +28,8 @@ export const saveTicketRouter = async (
       id: ticket.id,
       title: ticket.title,
       userId: ticket.userId,
-      price: ticket.price
+      price: ticket.price,
+      version: ticket.version
     });
 
   res

@@ -6,5 +6,6 @@ export interface OrderDocumentInterface extends Document {
   userId: string;
   status: OrderStatus;
   expiresAt: Date;
+  version: number;
   ticket: TicketDocInterface
 };

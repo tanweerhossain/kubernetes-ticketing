@@ -44,24 +44,25 @@ export const saveTicket = async (
 
 export const updateTicket = async (
   ticketId: string,
-  ticketAttributes: TicketAttributesInterface):
+  ticketAttributes: TicketAttributesInterface,
+  version: number | undefined = undefined):
   Promise<TicketDocInterface |
     null> => {
   try {
-    let result:
-      TicketDocInterface |
-      null = await Ticket.findOneAndUpdate({ _id: ticketId }, {
-        $set: ticketAttributes
-      }, {
-        new: true,
-        upsert: false
-      });
+    let result: TicketDocInterface | null;
 
-    if (!!result) {
-      return result;
-    }
+    result = (typeof version === 'number' && ticketAttributes?.version)
+      ? await Ticket.findByEvent({ id: ticketId, version: ticketAttributes.version })
+      : await Ticket.findOne({ _id: ticketId });
 
-    return null;
+    if (!result) return null;
+
+    result.title = ticketAttributes.title || result.title;
+    result.price = ticketAttributes.price || result.price;
+
+    await result.save();
+
+    return result;
   } catch (error) {
     console.error(error);
     throw new DatabaseConnectionError('Failed to update ticket');

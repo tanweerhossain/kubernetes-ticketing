@@ -48,8 +48,8 @@ const aUnitOfTestingCycle = async (testIndex = 1) => {
   updateTicket(response.id, 2);
 };
 
-(function main() {
-  Array(1000).fill(1).map((_, i) => {
+(async function main() {
+  for (const i in Array(1000).fill(1)) {
     aUnitOfTestingCycle(i + 1);
-  });
+  }
 })()

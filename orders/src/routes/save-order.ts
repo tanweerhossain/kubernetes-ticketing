@@ -39,6 +39,7 @@ export const saveOrderRouter = async (
     .publish({
       id: order.id,
       status: order.status,
+      version: order.version,
       userId: order.userId,
       expiresAt: order.expiresAt.getTime().toString(),
       ticket: {
