@@ -4,7 +4,7 @@ import { Event } from "../interface/event";
 export abstract class Publisher<T extends Event> {
   public abstract subject: T['subject'];
 
-  constructor(private client: Stan) { }
+  constructor(protected client: Stan) { }
 
   publish(data: T['data']): Promise<void> {
     return new Promise((resolve, reject) => {
