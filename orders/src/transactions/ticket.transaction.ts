@@ -1,4 +1,4 @@
-import { DatabaseConnectionError } from "@tanweerhossain/common";
+import { BadRequest, DatabaseConnectionError } from "@tanweerhossain/common";
 import { TicketAttributesInterface } from "../interface/TicketAttributes";
 import { TicketDocInterface } from "../interface/TicketDoc";
 import { Ticket } from "../models/ticket";
@@ -51,11 +51,11 @@ export const updateTicket = async (
   try {
     let result: TicketDocInterface | null;
 
-    result = (typeof version === 'number' && ticketAttributes?.version)
-      ? await Ticket.findByEvent({ id: ticketId, version: ticketAttributes.version })
+    result = (typeof version === 'number' && version)
+      ? await Ticket.findByEvent({ id: ticketId, version })
       : await Ticket.findOne({ _id: ticketId });
 
-    if (!result) return null;
+    if (!result) throw new BadRequest("Ticket not found");
 
     result.title = ticketAttributes.title || result.title;
     result.price = ticketAttributes.price || result.price;

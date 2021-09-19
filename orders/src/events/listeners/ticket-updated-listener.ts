@@ -12,7 +12,7 @@ export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
 
     if (!id) throw new BadRequest("Ticket is missing");
 
-    await updateTicket(id, { id, title, price, version });
+    await updateTicket(id, { id, title, price }, version);
 
     // Only called on successful process
     msg.ack();

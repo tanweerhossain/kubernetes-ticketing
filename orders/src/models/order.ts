@@ -1,5 +1,6 @@
 import { OrderStatus } from "@tanweerhossain/common";
 import { model, Schema } from "mongoose";
+import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 import { OrderAttributesInterface } from "../interface/OrderAttributes";
 import { OrderDocumentInterface } from "../interface/OrderDocument";
 import { OrderModelInterface } from "../interface/OrderModel";
@@ -32,6 +33,9 @@ const orderSchema = new Schema({
     }
   }
 });
+
+orderSchema.set('versionKey', 'version');
+orderSchema.plugin(updateIfCurrentPlugin);
 
 orderSchema.statics.build = (attributes: OrderAttributesInterface):
   OrderDocumentInterface => {

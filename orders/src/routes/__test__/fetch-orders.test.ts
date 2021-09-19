@@ -18,9 +18,9 @@ it('Returns an error if the session doestn\'t exist', (done) => {
 
 it('fetch orders for an particular user', async () => {
   // Create 3 tickets
-  const ticketOne = await saveTicket(sampleTicket);
-  const ticketTwo = await saveTicket(sampleTicket);
-  const ticketThree = await saveTicket(sampleTicket);
+  const ticketOne = await saveTicket({ ...sampleTicket, id: new Types.ObjectId().toHexString() });
+  const ticketTwo = await saveTicket({ ...sampleTicket, id: new Types.ObjectId().toHexString() });
+  const ticketThree = await saveTicket({ ...sampleTicket, id: new Types.ObjectId().toHexString() });
 
   // Create One order as User #1
   await request(app)

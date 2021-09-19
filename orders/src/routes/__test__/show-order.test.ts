@@ -18,7 +18,7 @@ it('Returns an error if the session doestn\'t exist', (done) => {
 
 it('fetch the order', async () => {
   // Create a ticket
-  const ticket = await saveTicket(sampleTicket);
+  const ticket = await saveTicket({ ...sampleTicket, id: new Types.ObjectId().toHexString() });
 
   // Create One order with the ticket
   const { body: order } = await request(app)
@@ -43,7 +43,7 @@ it('fetch the order', async () => {
 
 it('return 400 if other user fetch the order', async () => {
   // Create a ticket
-  const ticket = await saveTicket(sampleTicket);
+  const ticket = await saveTicket({ ...sampleTicket, id: new Types.ObjectId().toHexString() });
 
   // Create One order with the ticket
   const { body: order } = await request(app)

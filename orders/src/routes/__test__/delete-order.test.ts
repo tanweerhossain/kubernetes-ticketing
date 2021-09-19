@@ -21,7 +21,7 @@ it('Returns an error if the session doestn\'t exist', (done) => {
 
 it('mark an order as cancelled', async () => {
   // Create a ticket
-  const ticket = await saveTicket(sampleTicket);
+  const ticket = await saveTicket({ ...sampleTicket, id: new Types.ObjectId().toHexString() });
 
   // Create One order with the ticket
   const { body: order } = await request(app)
@@ -47,7 +47,7 @@ it('mark an order as cancelled', async () => {
 
 it('Emits an order cancelled event', async () => {
   // Create a ticket
-  const ticket = await saveTicket(sampleTicket);
+  const ticket = await saveTicket({ ...sampleTicket, id: new Types.ObjectId().toHexString() });
 
   // Create One order with the ticket
   const { body: order } = await request(app)

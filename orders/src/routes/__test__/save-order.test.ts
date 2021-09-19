@@ -25,7 +25,7 @@ it('Returns an error if the ticket doestn\'t exist', (done) => {
 });
 
 it('Returns an error if the ticket already reserved', async () => {
-  const ticket = await saveTicket(sampleTicket);
+  const ticket = await saveTicket({ ...sampleTicket, id: new Types.ObjectId().toHexString() });
 
   if (!ticket) throw new Error('saveTicket failed');
 
@@ -46,7 +46,7 @@ it('Returns an error if the ticket already reserved', async () => {
 });
 
 it('reserves a ticket', async () => {
-  const ticket = await saveTicket(sampleTicket);
+  const ticket = await saveTicket({ ...sampleTicket, id: new Types.ObjectId().toHexString() });
 
   if (!ticket) throw new Error('saveTicket failed');
 
@@ -60,7 +60,7 @@ it('reserves a ticket', async () => {
 });
 
 it('Emits an order created event', async () => {
-  const ticket = await saveTicket(sampleTicket);
+  const ticket = await saveTicket({ ...sampleTicket, id: new Types.ObjectId().toHexString() });
 
   if (!ticket) throw new Error('saveTicket failed');
 
