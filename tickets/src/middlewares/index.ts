@@ -4,6 +4,7 @@ import CookieSession from "cookie-session";
 
 import { mongoSetup } from './db-setup';
 import { natsSetup } from './nats-setup';
+import { eventListners } from '../events/listeners';
 
 export const attachMiddlewares = async (app: Express): Promise<void> => {
   app.set('trust proxy', true);
@@ -25,5 +26,6 @@ export const attachMiddlewares = async (app: Express): Promise<void> => {
     if (!process.env.MONGO_DB_URL) throw new Error('MONGO_DB_URL is missing');
     await mongoSetup();
     await natsSetup();
+    eventListners();
   }
 };

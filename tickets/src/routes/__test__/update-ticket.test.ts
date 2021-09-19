@@ -1,9 +1,11 @@
+import { BadRequest } from "@tanweerhossain/common";
 import { Types } from "mongoose";
 import request, { Response } from "supertest";
 import { app } from "../../app";
 import { sampleCookie, sampleCookie2, sampleTicket, sampleTicket2 } from "../../constants/sample-test-data";
 import { natsWrapper } from "../../middlewares/nats-wrapper";
 import { saveTicketHelper } from "../../test/save-ticket-helper";
+import { getTicket } from "../../transactions/ticket.transaction";
 
 const endpoint: string = '/api/tickets/<ticketId>';
 
@@ -133,6 +135,29 @@ it('Must return 400 response if ticket price is incorrect', (done) => {
           ...sampleTicket,
           price: -1 * sampleTicket.price
         })
+        .end((err: any, res: Response): void => {
+          expect(res.statusCode).toEqual(400);
+
+          done();
+        });
+    });
+});
+
+it('Must return 400 response if ticket is reserved', (done) => {
+  saveTicketHelper()
+    .then(async (response: Response): Promise<void> => {
+      const { body: { id: ticketId } } = response;
+      const ticket = await getTicket(ticketId);
+
+      if (!ticket) throw new BadRequest("Failed to fetch ticket");
+
+      ticket.set({ orderId: new Types.ObjectId().toHexString() });
+      await ticket.save();
+
+      request(app)
+        .put(endpoint.replace('<ticketId>', ticketId))
+        .set('Cookie', sampleCookie)
+        .send(sampleTicket)
         .end((err: any, res: Response): void => {
           expect(res.statusCode).toEqual(400);
 

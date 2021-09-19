@@ -15,6 +15,8 @@ export const updateTicketRouter = async (
 
   if (ticket.userId !== req.currentUserInfo?.id) throw new UnAuthorized();
 
+  if (ticket.orderId) throw new BadRequest("Can\'t edit a reserved ticket");
+
   ticket = await updateTicket(ticket.id, req.body);
 
   if (!ticket) throw new BadRequest('Ticket updation failed');

@@ -7,16 +7,13 @@ import { Ticket } from "../models/ticket";
 
 export const saveTicket = async (
   ticketObject: TicketAttributesInterface):
-  Promise<LeanDocument<TicketDocInterface> |
-    null> => {
+  Promise<TicketDocInterface | null> => {
   try {
     let result: TicketDocInterface = Ticket.build(ticketObject);
 
     result = await result.save();
 
-    if (!!result) {
-      return result.toJSON();
-    }
+    if (!!result) return result;
 
     return null;
   } catch (error) {
@@ -27,16 +24,14 @@ export const saveTicket = async (
 
 export const getTicket = async (
   ticketId: string):
-  Promise<LeanDocument<TicketDocInterface> |
+  Promise<TicketDocInterface |
     null> => {
   try {
     let result:
       TicketDocInterface |
       null = await Ticket.findById(ticketId);
 
-    if (!!result) {
-      return result.toJSON();
-    }
+    if (!!result) return result;
 
     return null;
   } catch (error) {
