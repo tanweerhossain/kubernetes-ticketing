@@ -13,12 +13,12 @@ export const sampleCookie: string =
     )
     .toString('base64')}`;
 
-export const sampleCookie2: string =
+export const sampleCookie2 = (id?: string): string =>
   `express:sess=${Buffer
     .from(
       JSON.stringify({
         jwt: getJWT({
-          id: new Types.ObjectId().toHexString(),
+          id: id || new Types.ObjectId().toHexString(),
           email: 'email2@domain.com'
         })
       })
