@@ -87,3 +87,24 @@ export const getOrderByIdAndUser = async (
     throw new DatabaseConnectionError('Failed to fetch order');
   }
 };
+
+export const getOrderById = async (
+  orderId: string):
+  Promise<OrderDocumentInterface |
+    null> => {
+  try {
+    let result:
+      OrderDocumentInterface | null = await Order
+        .findOne({ _id: orderId })
+        .populate('ticket');
+
+    if (!!result) {
+      return result;
+    }
+
+    return null;
+  } catch (error) {
+    console.error(error);
+    throw new DatabaseConnectionError('Failed to fetch order');
+  }
+};
