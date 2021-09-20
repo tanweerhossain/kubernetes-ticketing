@@ -24,6 +24,7 @@ export * from './interface/ticket-created-event';
 export * from './interface/ticket-updated-event';
 export * from './interface/order-created-event';
 export * from './interface/order-cancelled-event';
+export * from './interface/expiration-complete-event';
 
 export * from './enums/subjects';
 export * from './enums/order-status';
