@@ -3,6 +3,7 @@ import { connect as MongoConnect, connection } from "mongoose";
 
 let mongo: any;
 jest.mock('../middlewares/nats-wrapper');
+jest.mock('../services/stripe');
 
 beforeAll(async (): Promise<void> => {
 

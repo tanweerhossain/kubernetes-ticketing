@@ -18,9 +18,9 @@ export const attachMiddlewares = async (app: Express): Promise<void> => {
   );
 
   if (!process.env.JWT_KEY) throw new Error('JWT_KEY is missing');
-  if (!process.env.STRIPE_KEY) throw new Error('STRIPE_KEY is missing');
 
   if (process.env.mode?.trim() !== 'test') {
+    if (!process.env.STRIPE_KEY) throw new Error('STRIPE_KEY is missing');
     if (!process.env.NATS_CLUSTER_URL) throw new Error('NATS_CLUSTER_URL is missing');
     if (!process.env.NATS_CLUSTER_ID) throw new Error('NATS_CLUSTER_ID is missing');
     if (!process.env.NATS_CLIENT_ID) throw new Error('NATS_CLIENT_ID is missing');

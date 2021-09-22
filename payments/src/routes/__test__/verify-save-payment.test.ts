@@ -3,8 +3,11 @@ import { Types } from "mongoose";
 import request from "supertest";
 import { app } from "../../app";
 import { sampleCookie, sampleCookie2, sampleOrder } from "../../constants/sample-test-data";
+import { stripe } from "../../services/stripe";
 import { createOrder } from "../../transactions/order.transaction";
+
 const endpoint: string = '/api/payments';
+
 it('Returns 401 if not authorized', async () => {
   await request(app)
     .post(endpoint)
@@ -73,4 +76,36 @@ it('Returns 400 if order got cancelled', async () => {
   expect(body.errors).toHaveLength(1);
   expect(body.errors[0]).toHaveProperty('message');
   expect(body.errors[0].message).toEqual('Can\'t pay cancelled order');
+});
+
+it('Returns a 201 with valid inputs', async () => {
+  const order = await createOrder({
+    id: sampleOrder.id,
+    status: OrderStatus.Created,
+    version: sampleOrder.version,
+    userId: sampleOrder.userId,
+    price: sampleOrder.ticket.price
+  });
+
+  if (!order) throw new BadRequest('Order creation failed');
+
+  const { body } = await request(app)
+    .post(endpoint)
+    .set('Cookie', sampleCookie2(order.userId))
+    .send({
+      token: 'tok_visa',
+      orderId: order.id
+    })
+    .expect(201);
+
+  expect(body).toHaveProperty('id');
+
+  const [[functionParams]] = (stripe.charges.create as jest.Mock).mock.calls;
+
+  expect(functionParams).toHaveProperty('currency');
+  expect(functionParams.currency).toEqual('INR');
+  expect(functionParams).toHaveProperty('amount');
+  expect(functionParams.amount).toEqual(order.price * 100);
+  expect(functionParams).toHaveProperty('source');
+  expect(functionParams.source).toEqual('tok_visa');
 });
