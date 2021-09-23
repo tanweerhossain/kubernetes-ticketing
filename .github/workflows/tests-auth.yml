@@ -1,0 +1,10 @@
+name: tests-auth
+on: pull_request
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - name: Test Auth Microservice
+        run: cd auth && npm install && npm run test:ci

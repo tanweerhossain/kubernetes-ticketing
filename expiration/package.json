@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev src/index.ts",
-    "test": "SET JWT_KEY=sdfd23kdwopewqiukc && SET mode=test && jest --watch-all --no-cache",
-    "test:ci": "JWT_KEY=sdfd23kdwopewqiukc mode=test jest --detectOpenHandles --forceExit"
+    "start": "ts-node-dev src/index.ts"
   },
   "jest": {
     "preset": "ts-jest",
