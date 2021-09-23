@@ -1,5 +1,4 @@
 import { BadRequest, OrderStatus } from "@tanweerhossain/common";
-import { Types } from "mongoose";
 import request from "supertest";
 import { app } from "../../app";
 import { sampleCookie, sampleCookie2, sampleOrder } from "../../constants/sample-test-data";
