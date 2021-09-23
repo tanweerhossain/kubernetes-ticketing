@@ -9,10 +9,10 @@ jobs:
       - name: Test Auth Microservice
         run: cd auth && npm install && npm run test:ci
       - name: Test Ticket Microservice
-        run: cd ../tickets && npm install && npm run test:ci
+        run: cd tickets && npm install && npm run test:ci
       - name: Test Order Microservice
-        run: cd ../orders && npm install && npm run test:ci
+        run: cd orders && npm install && npm run test:ci
       - name: Test Expiration Microservice
-        run: cd ../expiration && npm install && npm run test:ci
+        run: cd expiration && npm install && npm run test:ci
       - name: Test Payment Microservice
-        run: cd ../payments && npm install && npm run test:ci
+        run: cd payments && npm install && npm run test:ci
