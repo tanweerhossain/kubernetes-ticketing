@@ -5,6 +5,8 @@ const Header = ({ currentUser }) => {
   const links = [
     { label: 'Sign Up', href: '/auth/signup', labelVisibility: !currentUser },
     { label: 'Sign In', href: '/auth/signin', labelVisibility: !currentUser },
+    { label: 'Sell Tickets', href: '/tickets/new', labelVisibility: currentUser },
+    { label: 'My Orders', href: '/orders', labelVisibility: currentUser },
     { label: 'Sign Out', href: '/auth/signout', labelVisibility: currentUser }
   ]
     .filter(linkConfig => linkConfig.labelVisibility)

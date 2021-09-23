@@ -1,15 +1,17 @@
-import dev from './dev.json';
-import prod from './prod.json';
+import { default as DEV_CONF } from './dev.json';
+import { default as PROD_CONF } from './prod.json';
 
 export const nconf = {
-    get(key) {
-        switch(process.env.NODE_ENV) {
-            case 'production': {
-                return prod[key];
-            }
-            default: {
-                return dev[key];
-            }
-        }
+  get(key) {
+    const ENV = process.env.NODE_ENV;
+
+    switch (ENV) {
+      case 'production': {
+        return Object.getOwnPropertyDescriptor(PROD_CONF, key)?.value || '';
+      }
+      default: {
+        return Object.getOwnPropertyDescriptor(DEV_CONF, key)?.value || '';
+      }
     }
-};
+  }
+}

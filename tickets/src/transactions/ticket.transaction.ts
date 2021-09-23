@@ -42,16 +42,13 @@ export const getTicket = async (
 
 export const fetchTickets = async (
   userId: string):
-  Promise<LeanDocument<TicketDocInterface[]> |
+  Promise<TicketDocInterface[] |
     null> => {
   try {
     let result:
-      TicketDocInterface[] = await Ticket.find({ userId });
+      TicketDocInterface[] = await Ticket.find({ userId, orderId: undefined });
 
-    if (!!result) {
-      return result
-        .map(e => e.toJSON());
-    }
+    if (!!result) return result;
 
     return null;
   } catch (error) {

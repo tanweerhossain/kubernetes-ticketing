@@ -1,4 +1,5 @@
 {
   "API-SERVICE-HOST": "https://ticketing.dev",
-  "INGRESS-LOAD-BALANCER-HOST": "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local"
+  "INGRESS-LOAD-BALANCER-HOST": "http://ingress-nginx-controller.ingress-nginx.svc.cluster.local",
+  "STRIPE-PUBLISHABLE-KEY": "pk_test_51JbuWoSA8iiRvIJjn0clJ4IgYhJBAUkHhtjrzMYpmo3nIi3THl3PgqI037MtlhgUNFGwu9ZDva2eV8i9SlnWOG0X001bvnIe7T"
 }

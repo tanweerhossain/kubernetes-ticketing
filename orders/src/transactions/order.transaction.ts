@@ -53,7 +53,7 @@ export const fetchOrders = async (
     null> => {
   try {
     let result:
-      OrderDocumentInterface[] = await Order.find({ userId });
+      OrderDocumentInterface[] = await Order.find({ userId }).populate('ticket');
 
     if (!!result) {
       return result;
