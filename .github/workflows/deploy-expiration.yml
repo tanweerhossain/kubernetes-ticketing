@@ -1,0 +1,32 @@
+name: deploy-expiration
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - 'expiration/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Dummy Continuous Deployment
+        run: echo -e "1. Create an account in a Kubernetes Cluster Hosting Service Provider i.e Digital Ocean\n2. Uncomment the following command"
+      # - name: Create a Docker Session
+      #   run: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      #   env:
+      #     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      #     DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      # - name: Create a docker build
+      #   run: cd expiration && docker build -t tanweerhossain/expiration .
+      # - name: Push the image to docker-hub
+      #   run: docker push tanweerhossain/expiration
+      # - uses: digitalocean/action-doctl@v2
+      #   with:
+      #     token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+      # - name: Save ticketing cluster's credentials to your local kubeconfig
+      #   run: doctl kubernetes cluster kubeconfig save ticketing
+      # - name: Pulling the updated container image and restarting the deployment service
+      #   run: kubectl rollout restart deployment expiration-depl
