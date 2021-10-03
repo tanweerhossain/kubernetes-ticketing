@@ -16,3 +16,7 @@
 ## Continuous Deployment WorkFlow
 
 ![CD-work-flow](./images/CD-work-flow.png)
+
+## Lecture Notes
+
+File [Link](./NOTES.md)
